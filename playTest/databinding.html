@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .warning {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <p v-bind:class="errorTextColor">Hello</p>
+    <div>
+      <input type="text" v-model="textname" />
+      <p>{{textname}}</p>
+      <div>{{doubleNum}}</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        cname: "blue-Text",
+        isError: false,
+      },
+      computed: {
+        errorTextColor() {
+          if (this.isError) {
+            return 'warning'
+          } else {
+            return null;
+          }
+          //return this.isError ? "warning" : null;
+        }
+        //비교적 가벼운 valigate data가져오는 연산 실행시 사용,
+      },
+    });
+  </script>
+</body>
+
+</html>
