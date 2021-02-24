@@ -1,5 +1,7 @@
 <template>
-  <div>Header</div>
+  <header>
+    <h1>TODO it!</h1>
+  </header>
 </template>
 
 <script>
@@ -8,5 +10,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h1 {
+  color: rgb(11, 100, 122);
+  font-weight: 700;
+  margin: 2.5rem 0 1.5rem;
+}
 </style>
