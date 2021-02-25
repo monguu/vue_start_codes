@@ -32,6 +32,7 @@ export default {
 .clearBtn {
   color: rgb(255, 255, 255);
   display: block;
+  border-style: solid 3px rgb(13, 232, 240);
 }
 
 </style>

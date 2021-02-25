@@ -1,36 +1,38 @@
 <template>
   <div class="inputBox shadow">
-    <input 
-    type="text" v-model="TodoItem" v-on:keyup.enter="addTodo"
-    placeholder="할일을 입력해주세요.">
+    <input
+      type="text"
+      v-model="TodoItem"
+      v-on:keyup.enter="addTodo"
+      placeholder="할일을 입력해주세요."
+    />
     <!-- <button v-on:click="addTodo">Add</button> -->
-    
+
     <span class="addContainer" v-on:click="addTodo">
-     <i class="fas fa-check add addBtn"></i>
+      <i class="fas fa-check add addBtn"></i>
     </span>
     <Modal v-if="showModal" @close="showModal = false">
-    <!--
+      <!--
       you can use custom content here to overwrite
       default content
     -->
-    <h3 slot="header">경고
-      <div>
-      <i class="far fa-angry"></i>
-      </div>
-    </h3>
-    <h3 slot="body">할일을 등록해주세요!</h3>
-    <h5 slot="footer">Monguu App
-      <div>
-        <i class="far fa-times-circle closeModalBtn"
-          @click="showModal = false"
-        ></i>
-      </div>
-    </h5>
-     <!-- <button class="modal-default-button" @click="$emit('close')">
-                닫기
-              </button> -->
-   
-  </Modal>
+      <h3 slot="header">
+        경고
+        <div>
+          <i class="far fa-angry iconface"></i>
+        </div>
+      </h3>
+      <h3 slot="body">할일을 등록해주세요!</h3>
+      <h5 slot="footer">
+        Monguu App
+        <div>
+          <i
+            class="far fa-times-circle closeModalBtn"
+            @click="showModal = false"
+          ></i>
+        </div>
+      </h5>
+    </Modal>
   </div>
 </template>
 
@@ -41,21 +43,21 @@ export default {
   data() {
     return {
       TodoItem: "",
-      showModal: false
-    }
+      showModal: false,
+    };
   },
   methods: {
     addTodo() {
-      if(this.TodoItem !== "") {
-        this.$emit("addTodoItem", this.TodoItem)
-        this.clearInput()
-       }else {
-         this.showModal = !this.showModal
-       }
+      if (this.TodoItem !== "") {
+        this.$emit("addTodoItem", this.TodoItem);
+        this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
+      }
     },
-    clearInput () {
+    clearInput() {
       this.TodoItem = "";
-    }
+    },
   },
   components: {
     Modal,
@@ -94,10 +96,13 @@ i {
   font-size: 25px;
 }
 h1 {
-  color: red
+  color: red;
 }
 .closeModalBtn {
-  color:burlywood;
+  color: burlywood;
   float: right;
+}
+.iconface {
+  color: red;
 }
 </style>
