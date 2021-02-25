@@ -1,34 +1,65 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="TodoItem" v-on:keyup.enter="addTodo">
+    <input 
+    type="text" v-model="TodoItem" v-on:keyup.enter="addTodo"
+    placeholder="할일을 입력해주세요.">
     <!-- <button v-on:click="addTodo">Add</button> -->
+    
     <span class="addContainer" v-on:click="addTodo">
      <i class="fas fa-check add addBtn"></i>
     </span>
+    <Modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <h3 slot="header">경고
+      <div>
+      <i class="far fa-angry"></i>
+      </div>
+    </h3>
+    <h3 slot="body">할일을 등록해주세요!</h3>
+    <h5 slot="footer">Monguu App
+      <div>
+        <i class="far fa-times-circle closeModalBtn"
+          @click="showModal = false"
+        ></i>
+      </div>
+    </h5>
+     <!-- <button class="modal-default-button" @click="$emit('close')">
+                닫기
+              </button> -->
+   
+  </Modal>
   </div>
 </template>
 
 <script>
+import Modal from "./ground/Modal";
 export default {
   name: "TodoInput",
   data() {
     return {
       TodoItem: "",
+      showModal: false
     }
   },
   methods: {
     addTodo() {
       if(this.TodoItem !== "") {
-      let obj = {completed: false, item: this.TodoItem}
-      console.log(this.TodoItem);
-      localStorage.setItem(this.TodoItem, JSON.stringify(obj));
-      this.clearInput()
+        this.$emit("addTodoItem", this.TodoItem)
+        this.clearInput()
+       }else {
+         this.showModal = !this.showModal
        }
     },
     clearInput () {
       this.TodoItem = "";
     }
-  }
+  },
+  components: {
+    Modal,
+  },
 };
 </script>
 
@@ -61,5 +92,12 @@ input:focus {
 }
 i {
   font-size: 25px;
+}
+h1 {
+  color: red
+}
+.closeModalBtn {
+  color:burlywood;
+  float: right;
 }
 </style>

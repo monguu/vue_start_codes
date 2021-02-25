@@ -1,54 +1,43 @@
 <template>
-<ul>
-  <li 
-  v-for="(todoItem, index) in todoItems" 
-  v-bind:key="todoItem">
-  <span class="checkBtn" v-on:click="completedTodo">
-    <i class="far fa-check-square"></i>
-  </span>
-    <span v-bind:class="{textCompleted: todoItem.completed}">
-     {{ todoItem.item }}
-    </span>
-  <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
-    <i class="far fa-trash-alt"></i>
-  </span>
-  </li>
-</ul>
+<div>
+  <transition-group name="list" tag="ul">
+      <li
+        v-for="(todoItem, index) in propsdata" 
+        v-bind:key="todoItem.item">
+      <span class="checkBtn" 
+        v-on:click="completedTodo(todoItem, index)" 
+        v-bind:class="{checkBtnCompleted: todoItem.completed}"
+      >
+        <i class="far fa-check-square"></i>
+      </span>
+      
+        <span v-bind:class="{textCompleted: todoItem.completed}">
+        {{ todoItem.item }}
+        </span>
+        <span 
+        class="removeBtn" 
+        v-on:click="removeTodo(todoItem, index)"
+        
+        >
+          <i class="far fa-trash-alt"></i>
+        </span>
+      </li>
+  </transition-group>
+</div>
 </template>
 
 <script>
 export default {
   name: "Todolist",
-  data() {
-    return {
-      todoItems: [],
-    }
-  },
+  props: ["propsdata"],
    methods: {
     removeTodo(todoItem, index) {
-      // this.todoItem.splice(index,1)
-      console.log(todoItem, index)
-      localStorage.removeItem(todoItem, index);
-      this.todoItems.splice(index,1)
+      this.$emit("removeItem", todoItem, index)
     },
-    completedTodo() {
-
+    completedTodo(todoItem, index) {
+      this.$emit("completeTodo", todoItem, index)
     }
   },
-  created() {
-    if(localStorage.length > 0) {
-      for(let i=0; i < localStorage.length; i++) {
-       if(localStorage.key(i) !== "loglevel:webpack-dev-server") {
-        this.todoItems
-        .push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-       }
-        // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))))
-        // this.todoItems.push(localStorage.key(i));
-       // this.todoItems.push(localStorage.key(i));
-      }
-    }
-  },
- 
 };
 </script>
 
@@ -83,7 +72,7 @@ li {
   margin-right: 10px;
 }
 .checkBtnCompleted {
-  color: rgb(27, 201, 186)
+  color: rgb(131, 131, 131)
 }
 .removeBtn {
   margin-left: auto;
@@ -94,5 +83,12 @@ li {
   text-decoration: line-through;
   color: rgb(102, 101, 101)
 }
-
+/* 리스트 아이템 뷰 효과 */
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
 </style>
