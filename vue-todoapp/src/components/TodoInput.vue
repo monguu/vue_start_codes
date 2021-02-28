@@ -3,7 +3,6 @@
     <input 
     type="text" v-model="todoItem" v-on:keyup.enter="addTodo"
     placeholder="할일을 입력해주세요.">
-
     <span class="addContainer" v-on:click="addTodo">
      <i class="fas fa-check add addBtn"></i>
     </span>
