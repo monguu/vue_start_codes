@@ -11,7 +11,7 @@ export default {
   name: "TodoFooter",
   methods: {
     allClearTodo () {
-      this.$emit("deleteTodo")
+      this.$store.commit("deleteComTodo")
      
     }
   },

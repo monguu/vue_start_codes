@@ -2,24 +2,20 @@
 <div>
   <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in propsdata" 
+        v-for="(todoItem, index) in this.$store.state.todoItems" 
         v-bind:key="todoItem.item">
-      <span class="checkBtn" 
-        v-on:click="completedTodo(todoItem, index)" 
-        v-bind:class="{checkBtnCompleted: todoItem.completed}"
-      >
-        <i class="far fa-check-square"></i>
-      </span>
-      
+        <span class="checkBtn" 
+          v-on:click="completedTodo(todoItem, index)" 
+          v-bind:class="{checkBtnCompleted: todoItem.completed}"
+          ><i class="far fa-check-square"></i>
+        </span>
         <span v-bind:class="{textCompleted: todoItem.completed}">
-        {{ todoItem.item }}
+          {{ todoItem.item }}
         </span>
         <span 
-        class="removeBtn" 
-        v-on:click="removeTodo(todoItem, index)"
-        
-        >
-          <i class="far fa-trash-alt"></i>
+          class="removeBtn" 
+          v-on:click="removeTodo(todoItem, index)"
+          ><i class="far fa-trash-alt"></i>
         </span>
       </li>
   </transition-group>
@@ -29,13 +25,13 @@
 <script>
 export default {
   name: "Todolist",
-  props: ["propsdata"],
+  // props: ["propsdata"],
    methods: {
     removeTodo(todoItem, index) {
-      this.$emit("removeItem", todoItem, index)
+      this.$store.commit("removeComItem", {todoItem, index})
     },
     completedTodo(todoItem, index) {
-      this.$emit("completeTodo", todoItem, index)
+      this.$store.commit("completeComTodo", {todoItem, index})
     }
   },
 };

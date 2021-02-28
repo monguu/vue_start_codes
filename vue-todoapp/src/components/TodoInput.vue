@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
     <input 
-    type="text" v-model="TodoItem" v-on:keyup.enter="addTodo"
+    type="text" v-model="todoItem" v-on:keyup.enter="addTodo"
     placeholder="할일을 입력해주세요.">
     <!-- <button v-on:click="addTodo">Add</button> -->
     
@@ -40,21 +40,22 @@ export default {
   name: "TodoInput",
   data() {
     return {
-      TodoItem: "",
+      todoItem: "",
       showModal: false
     }
   },
   methods: {
     addTodo() {
-      if(this.TodoItem !== "") {
-        this.$emit("addTodoItem", this.TodoItem)
+      if(this.todoItem !== "") {
+        // const text = this.todoItem.trim()
+        this.$store.commit('addcomTodo', this.todoItem)
         this.clearInput()
        }else {
          this.showModal = !this.showModal
        }
     },
     clearInput () {
-      this.TodoItem = "";
+      this.todoItem = "";
     }
   },
   components: {
@@ -74,6 +75,7 @@ input:focus {
   border-radius: 10px;
   margin-left: 30px;
   margin-right: 30px;
+  border: solid 3px rgb(21, 226, 233);
 }
 .inputBox input {
   border-style: none;
