@@ -7,13 +7,17 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "TodoFooter",
   methods: {
-    allClearTodo () {
-      this.$store.commit("deleteComTodo")
+    ...mapMutations ({
+      allClearTodo: "deleteComTodo"
+    })
+    // allClearTodo () {
+    //   this.$store.commit("deleteComTodo")
      
-    }
+    // }
   },
 };
 

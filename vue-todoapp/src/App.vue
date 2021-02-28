@@ -19,7 +19,9 @@ export default {
     Todolist,
     TodoInput,
   },
-};
+
+}
+
 </script>
 
 <style>

@@ -21,6 +21,11 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch()
   },
+  getters: {
+    getTodoItems(state) {
+      return state.todoItems;
+    }
+  },
   mutations: {
     addcomTodo(state, todoItem) {
       let obj = { completed: false, item: todoItem };
@@ -48,9 +53,9 @@ export const store = new Vuex.Store({
   }
   // actions: {
   //   delayInputText(context) {
-  //     setTimeout(()=> {
-  //       context.commit("addcomTodo"), 1000
-  //     })
+  //     setTimeout(() => {
+  //       context.commit("addcomTodo"), 1000;
+  //     });
   //   }
   // }
 });

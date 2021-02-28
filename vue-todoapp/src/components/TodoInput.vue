@@ -3,16 +3,11 @@
     <input 
     type="text" v-model="todoItem" v-on:keyup.enter="addTodo"
     placeholder="할일을 입력해주세요.">
-    <!-- <button v-on:click="addTodo">Add</button> -->
-    
+
     <span class="addContainer" v-on:click="addTodo">
      <i class="fas fa-check add addBtn"></i>
     </span>
     <Modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
     <h3 slot="header">경고
       <div>
       <i class="far fa-angry"></i>
@@ -26,10 +21,6 @@
         ></i>
       </div>
     </h5>
-     <!-- <button class="modal-default-button" @click="$emit('close')">
-                닫기
-              </button> -->
-   
   </Modal>
   </div>
 </template>
